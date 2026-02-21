@@ -4,19 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ed's Reserve | Premium Indoor Exotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
     <img src="images/logo.png" alt="Ed's Reserve Logo" class="logo">
-		<p class="sub">Local Delivery & Pickup - Bastrop, Elgin & Nearby Locations</p>
+    <p class="sub">Local Delivery & Pickup - Bastrop, Elgin & Nearby Locations</p>
 </header>
 
 <section class="menu">
     <h2>Current Indoor Menu</h2>
-	<p class="menu-tagline">Only The Real Sh*t</p>
+    <p class="menu-tagline">Only The Real Sh*t</p>
 
     <div class="strain-card">
         <img src="images/grapegas.jpg" alt="Grape Gas">
@@ -24,32 +26,31 @@
         <div class="strain-info">
             <h3>Grape Gas</h3>
             <p class="thc">Total THC: 29.31%</p>
-			
-			<button class="toggle-btn">View Strain Details</button>
+            
+            <button class="toggle-btn">View Strain Details</button>
 
             <div class="details">
                 <p>Grape Gas is an evenly balanced hybrid strain (50% indica/50% sativa) created through a potent cross of (OG Chem X Grand Daddy Purple) X The Truth.</p>
-				<a href="coming-soon" class="coa-btn">View COA</a>
+                <a href="coming-soon" class="coa-btn">View COA</a>
             </div>
 
             <div class="pricing">
-                <span>3.5g — $25</span>
-                <span>7g — $40</span>
-                <span>14g — $70</span>
-				<span>28g — $120</span>
+                <span><span class="weight">3.5g</span> <span class="price">$25</span></span>
+                <span><span class="weight">7g</span> <span class="price">$40</span></span>
+                <span><span class="weight">14g</span> <span class="price">$70</span></span>
+                <span><span class="weight">28g</span> <span class="price">$120</span></span>
             </div>
-			<p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><br><strong>WITH YOUR ID OR DRIVERS LICENSE</strong></p>
-			<p>+$5-10 For Delivery, Pickup HIGHLY Preferred</p>
-			<p><strong>We only accept cash.</strong></p>
+            <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><br><strong>WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION</strong></p>
+            <p>+$5-10 For Delivery, Pickup HIGHLY Preferred</p>
+            <p><strong>We only accept cash.</strong></p>
         </div>
     </div>
-	
-
+    
 </section>
 
 <div class="order-bar">
-    <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><strong>WITH YOUR ID OR DRIVERS LICENSE</strong></p>
-	<p>Farm Bill Compliant | 21+ Only</p>
+    <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><strong>WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION</strong></p>
+    <p>Farm Bill Compliant | 21+ Only</p>
 </div>
 
 <script>
@@ -62,31 +63,117 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
 });
 </script>
 
+<!-- Zoomable Image Modal -->
 <div id="imgModal" class="modal">
     <span class="close">&times;</span>
-    <img class="modal-content" id="modalImg">
+    <div class="modal-content-container">
+        <img class="modal-content" id="modalImg">
+    </div>
 </div>
 
 <script>
-const modal = document.getElementById("imgModal");
-const modalImg = document.getElementById("modalImg");
+(function() {
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.querySelector(".close");
+    let scale = 1;
+    let panX = 0, panY = 0;
+    let isDragging = false;
+    let startX, startY;
 
-document.querySelectorAll(".strain-card img").forEach(img => {
-    img.addEventListener("click", function() {
-        modal.style.display = "flex";
-        modalImg.src = this.src;
+    // Open modal
+    document.querySelectorAll(".strain-card img").forEach(img => {
+        img.addEventListener("click", function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            resetZoom();
+        });
     });
-});
 
-document.querySelector(".close").onclick = function() {
-    modal.style.display = "none";
-};
+    // Close modal
+    closeBtn.onclick = () => modal.style.display = "none";
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    };
 
-modal.onclick = function(e) {
-    if (e.target === modal) {
-        modal.style.display = "none";
+    // Zoom with wheel (desktop)
+    modalImg.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const rect = modalImg.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const delta = -Math.sign(e.deltaY) * 0.1;
+        const newScale = Math.min(3, Math.max(0.5, scale + delta));
+        zoomAt(newScale, mouseX, mouseY);
+    });
+
+    // Pinch zoom & pan (mobile)
+    let touchDistance = 0;
+    modalImg.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            touchDistance = getTouchDistance(e.touches);
+        } else if (e.touches.length === 1) {
+            isDragging = true;
+            startX = e.touches[0].clientX - panX;
+            startY = e.touches[0].clientY - panY;
+        }
+    }, { passive: false });
+
+    modalImg.addEventListener("touchmove", (e) => {
+        e.preventDefault();
+        if (e.touches.length === 2) {
+            const newDist = getTouchDistance(e.touches);
+            const delta = (newDist - touchDistance) * 0.01;
+            const newScale = Math.min(3, Math.max(0.5, scale + delta));
+            // zoom at center of pinch
+            const rect = modalImg.getBoundingClientRect();
+            const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+            const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+            zoomAt(newScale, midX, midY);
+            touchDistance = newDist;
+        } else if (e.touches.length === 1 && isDragging) {
+            panX = e.touches[0].clientX - startX;
+            panY = e.touches[0].clientY - startY;
+            applyTransform();
+        }
+    }, { passive: false });
+
+    modalImg.addEventListener("touchend", (e) => {
+        if (e.touches.length < 2) touchDistance = 0;
+        if (e.touches.length === 0) isDragging = false;
+    });
+
+    // Double-tap to reset
+    modalImg.addEventListener("dblclick", resetZoom);
+
+    function getTouchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx*dx + dy*dy);
     }
-};
+
+    function zoomAt(newScale, x, y) {
+        const rect = modalImg.getBoundingClientRect();
+        const originX = x / rect.width;
+        const originY = y / rect.height;
+        panX = panX - (newScale - scale) * originX * rect.width;
+        panY = panY - (newScale - scale) * originY * rect.height;
+        scale = newScale;
+        applyTransform();
+    }
+
+    function resetZoom() {
+        scale = 1;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        modalImg.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    }
+})();
 </script>
 </body>
 </html>
