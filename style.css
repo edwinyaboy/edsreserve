@@ -1,0 +1,257 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0b0b;
+    color: #f2f2f2;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 30px 15px;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.logo {
+    max-width: 30%;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 2.5rem;
+    color: green;
+}
+
+.sub {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Menu Section */
+.menu {
+    padding: 20px 15px 140px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.menu h2 {
+    text-align: center;
+}
+
+.menu-tagline {
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+	opacity: 0.7;
+}
+
+/* Strain Card */
+.strain-card {
+    background: #151515;
+    border: 1px solid #1c1c1c;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+}
+
+.strain-card:hover {
+    border-color: #00c853;
+    box-shadow: 0 0 20px rgba(0, 200, 83, 0.4);
+    opacity: 0.95;
+}
+
+.strain-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+	cursor: zoom-in;
+    transition: 0.3s ease;
+}
+
+.strain-info {
+    padding: 15px;
+}
+
+.strain-info h3 {
+	font-size: 2.0rem
+}
+
+.type, .thc {
+    font-size: 1.0rem;
+    color: #fff;
+}
+
+.pricing {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.toggle-btn {
+    background: green;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 255, 0, 0.3);
+}
+
+.toggle-btn:hover {
+    opacity: 0.85;
+}
+
+.details {
+    display: none;
+    margin-top: 10px;
+}
+
+.details.show {
+    display: block;
+}
+
+.coa-btn {
+    display: inline-block;
+    margin-top: 8px;
+    background: green;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.coa-btn:hover {
+    opacity: 0.85;
+}
+
+/* Sticky Order Bar */
+.order-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111;
+    border-top: 1px solid #222;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.95rem;
+}
+
+.order-bar p:last-child {
+    font-size: 0.7rem;
+    opacity: 0.5;
+}
+
+/* Desktop adjustments */
+@media(min-width: 768px) {
+
+    .menu {
+        max-width: 800px;
+    }
+
+    .strain-card {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        align-items: start;
+    }
+
+    .strain-card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .strain-info {
+        width: 100%;
+    }
+}
+
+/* Click to Zoom Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 95%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.sms-link {
+    color: green;
+    text-decoration: none;
+	font-weight: bold;
+}
+
+.coming-soon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background: #0b0b0b;
+    color: #f2f2f2;
+    padding: 20px;
+}
+
+.coming-soon h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: green;
+}
+
+.coming-soon p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 400px;
+    opacity: 0.8;
+}
+
+.back-btn {
+    display: inline-block;
+    background: green;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    opacity: 0.85;
+}
