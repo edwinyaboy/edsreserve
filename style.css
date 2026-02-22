@@ -100,7 +100,6 @@ header {
     box-shadow: 0 20px 35px -12px var(--accent-glow);
 }
 
-/* Image wrapper for watermark */
 .strain-image-wrapper::before {
     content: "";
     position: absolute;
@@ -109,14 +108,13 @@ header {
     width: 100%;
     height: 100%;
     background-image: url('images/logo.png');
-    background-size: 60% auto;        /* same size as before */
+    background-size: 60% auto;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.25;                    /* adjust as needed */
-    pointer-events: none;              /* so clicks go through to the image */
+    opacity: 0.45;
+    pointer-events: none;
     z-index: 2;
 }
-
 
 .strain-image-wrapper {
     position: relative;
@@ -154,10 +152,9 @@ header {
     object-fit: contain;
     transition: transform 0.4s ease;
     border-bottom: 1px solid var(--border-subtle);
-	box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-radius: 8px;
 }
-
 
 .strain-card:hover .strain-img {
     transform: scale(1.02);
@@ -194,7 +191,7 @@ header {
     letter-spacing: 0.3px;
 }
 
-/* ===== PRICING (CLEANER LAYOUT) ===== */
+/* ===== PRICING ===== */
 .pricing {
     margin: 20px 0;
     display: grid;
@@ -335,12 +332,29 @@ header {
 }
 
 .modal-content-container {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+.modal-content-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/logo.png');
+    background-size: 30% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 1005;
 }
 
 .modal-content {
@@ -353,8 +367,8 @@ header {
     transition: transform 0.05s ease;
     transform-origin: 0 0;
     will-change: transform;
-    user-select: none;      /* prevent accidental text selection */
-    -webkit-user-drag: none; /* disable default image dragging */
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .modal-content:active {
@@ -412,6 +426,7 @@ header {
     }
 }
 
+/* ===== COMING SOON PAGE ===== */
 .coming-soon {
     display: flex;
     flex-direction: column;

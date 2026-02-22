@@ -33,7 +33,7 @@
 
             <div class="details">
                 <p>Grape Gas is an evenly balanced hybrid strain (50% indica/50% sativa) created through a potent cross of (OG Chem X Grand Daddy Purple) X The Truth.</p>
-                <a href="coming-soon" class="coa-btn">View COA</a>
+                <a href="coming-soon.html" class="coa-btn">View COA</a>
             </div>
 
             <div class="pricing">
@@ -83,7 +83,6 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
     let isDragging = false;
     let startX, startY;
 
-    // Open modal
     document.querySelectorAll(".strain-img").forEach(img => {
         img.addEventListener("click", function() {
             modal.style.display = "flex";
@@ -92,15 +91,13 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         });
     });
 
-    // Close modal
     closeBtn.onclick = () => modal.style.display = "none";
     modal.onclick = (e) => {
         if (e.target === modal) modal.style.display = "none";
     };
 
-    // ----- Mouse panning (desktop) -----
     modalImg.addEventListener("mousedown", (e) => {
-        e.preventDefault(); // prevent default drag behavior (copy image)
+        e.preventDefault();
         isDragging = true;
         startX = e.clientX - panX;
         startY = e.clientY - panY;
@@ -120,7 +117,6 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         modalImg.style.cursor = "grab";
     });
 
-    // ----- Zoom with wheel (desktop) -----
     modalImg.addEventListener("wheel", (e) => {
         e.preventDefault();
         const rect = modalImg.getBoundingClientRect();
@@ -131,7 +127,6 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         zoomAt(newScale, mouseX, mouseY);
     });
 
-    // ----- Touch events (mobile) -----
     let touchDistance = 0;
     modalImg.addEventListener("touchstart", (e) => {
         e.preventDefault();
@@ -167,7 +162,6 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         if (e.touches.length === 0) isDragging = false;
     });
 
-    // Double-tap to reset
     modalImg.addEventListener("dblclick", resetZoom);
 
     function getTouchDistance(touches) {
