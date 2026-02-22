@@ -21,7 +21,9 @@
     <p class="menu-tagline">Only The Real Sh*t</p>
 
     <div class="strain-card">
-        <img src="images/grapegas.jpg" alt="Grape Gas">
+        <div class="strain-image-wrapper">
+            <img src="images/grapegas.jpg" alt="Grape Gas" class="strain-img">
+        </div>
         
         <div class="strain-info">
             <h3>Grape Gas</h3>
@@ -82,7 +84,7 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
     let startX, startY;
 
     // Open modal
-    document.querySelectorAll(".strain-card img").forEach(img => {
+    document.querySelectorAll(".strain-img").forEach(img => {
         img.addEventListener("click", function() {
             modal.style.display = "flex";
             modalImg.src = this.src;
@@ -96,7 +98,29 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         if (e.target === modal) modal.style.display = "none";
     };
 
-    // Zoom with wheel (desktop)
+    // ----- Mouse panning (desktop) -----
+    modalImg.addEventListener("mousedown", (e) => {
+        e.preventDefault(); // prevent default drag behavior (copy image)
+        isDragging = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+        modalImg.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        applyTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+        isDragging = false;
+        modalImg.style.cursor = "grab";
+    });
+
+    // ----- Zoom with wheel (desktop) -----
     modalImg.addEventListener("wheel", (e) => {
         e.preventDefault();
         const rect = modalImg.getBoundingClientRect();
@@ -107,11 +131,11 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
         zoomAt(newScale, mouseX, mouseY);
     });
 
-    // Pinch zoom & pan (mobile)
+    // ----- Touch events (mobile) -----
     let touchDistance = 0;
     modalImg.addEventListener("touchstart", (e) => {
+        e.preventDefault();
         if (e.touches.length === 2) {
-            e.preventDefault();
             touchDistance = getTouchDistance(e.touches);
         } else if (e.touches.length === 1) {
             isDragging = true;
@@ -126,7 +150,6 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
             const newDist = getTouchDistance(e.touches);
             const delta = (newDist - touchDistance) * 0.01;
             const newScale = Math.min(3, Math.max(0.5, scale + delta));
-            // zoom at center of pinch
             const rect = modalImg.getBoundingClientRect();
             const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
             const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;

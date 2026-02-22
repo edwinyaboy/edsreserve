@@ -100,16 +100,66 @@ header {
     box-shadow: 0 20px 35px -12px var(--accent-glow);
 }
 
-.strain-card img {
+/* Image wrapper for watermark */
+.strain-image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/logo.png');
+    background-size: 60% auto;        /* same size as before */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;                    /* adjust as needed */
+    pointer-events: none;              /* so clicks go through to the image */
+    z-index: 2;
+}
+
+
+.strain-image-wrapper {
+    position: relative;
+    width: 100%;
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-in;
+}
+.strain-image-wrapper::after {
+    content: "🔍 Click to zoom";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.strain-image-wrapper:hover::after {
+    opacity: 1;
+}
+
+.strain-img {
     width: 100%;
     height: auto;
     display: block;
-    cursor: zoom-in;
+    object-fit: contain;
     transition: transform 0.4s ease;
     border-bottom: 1px solid var(--border-subtle);
+	box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-radius: 8px;
 }
 
-.strain-card:hover img {
+
+.strain-card:hover .strain-img {
     transform: scale(1.02);
 }
 
@@ -294,7 +344,7 @@ header {
 }
 
 .modal-content {
-    max-width: none;  /* remove limits so we can scale */
+    max-width: none;
     max-height: none;
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.7);
@@ -303,6 +353,8 @@ header {
     transition: transform 0.05s ease;
     transform-origin: 0 0;
     will-change: transform;
+    user-select: none;      /* prevent accidental text selection */
+    -webkit-user-drag: none; /* disable default image dragging */
 }
 
 .modal-content:active {
@@ -334,7 +386,6 @@ header {
     transform: scale(1.1);
 }
 
-/* ===== DESKTOP TWEAKS ===== */
 @media(min-width: 768px) {
     .menu {
         max-width: 900px;
@@ -344,12 +395,14 @@ header {
     .strain-card {
         display: grid;
         grid-template-columns: 40% 60%;
-        align-items: start;
+        align-items: stretch;
     }
 
     .strain-card img {
+        width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         border-bottom: none;
         border-right: 1px solid var(--border-subtle);
     }
@@ -359,11 +412,9 @@ header {
     }
 }
 
-/* ===== COMING SOON PAGE ===== */
 .coming-soon {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
