@@ -411,6 +411,6 @@ body.modal-open {
 @media(min-width:768px){
     .menu{max-width:900px;padding-bottom:160px}
     .strain-card{flex-direction:row}
-    .strain-card img{width:100%;height:100%;object-fit:contain;border-bottom:none;border-right:1px solid var(--border-subtle)}
+    .strain-card img{width:100%;height:100%;object-fit:cover;border-bottom:none;border-right:1px solid var(--border-subtle)}
     .pricing{grid-template-columns:1fr 1fr}
 }
