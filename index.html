@@ -4,193 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ed's Reserve | Premium Indoor Exotics</title>
+<meta name="description" content="Ed's Reserve - Premium indoor exotic flower. Local delivery & pickup in Bastrop, Elgin & nearby areas. 21+ only.">
+<meta property="og:title" content="Ed's Reserve | Premium Indoor Exotics">
+<meta property="og:description" content="Premium indoor exotic flower. Local delivery & pickup in Bastrop & Elgin.">
+<meta property="og:image" content="images/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edwinyaboy.github.io/edsreserve/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<link rel="canonical" href="https://edwinyaboy.github.io/edsreserve/">
+<meta name="theme-color" content="#000000">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Ed's Reserve","image":"https://edwinyaboy.github.io/edsreserve/images/logo.png","telephone":"+17373219540","address":{"@type":"PostalAddress","addressLocality":"Elgin","addressRegion":"TX","postalCode":"78621","addressCountry":"US"},"url":"https://edwinyaboy.github.io/edsreserve/","sameAs":[]}
+</script>
 </head>
 <body>
 
 <header>
-    <img src="images/logo.png" alt="Ed's Reserve Logo" class="logo">
-    <p class="sub">Local Delivery & Pickup - Bastrop, Elgin & Nearby Locations</p>
+    <img src="images/logo.png" fetchpriority="high" alt="Ed's Reserve Logo" class="logo">
+    <p class="sub">Local Pickup - Serving Bastrop, Elgin & Nearby Locations</p>
 </header>
 
-<section class="menu">
+<main class="menu" role="main">
     <h2>Current Indoor Menu</h2>
     <p class="menu-tagline">Only The Real Sh*t</p>
 
-    <div class="strain-card">
+    <article class="strain-card" itemscope itemtype="https://schema.org/Product">
         <div class="strain-image-wrapper">
-            <img src="images/grapegas.jpg" alt="Grape Gas" class="strain-img">
+            <img src="images/grapegas.jpg" loading="lazy" alt="Grape Gas strain flower" class="strain-img" itemprop="image">
         </div>
-        
         <div class="strain-info">
-            <h3>Grape Gas</h3>
-            <p class="thc">Total THC: 29.31%</p>
-            
-            <button class="toggle-btn">View Strain Details</button>
-
-            <div class="details">
+            <h3 itemprop="name">Grape Gas</h3>
+            <p class="thc" itemprop="description">Total THC: 29.31%</p>
+            <button class="toggle-btn" aria-expanded="false">View Strain Details</button>
+            <div class="details" aria-hidden="true">
                 <p>Grape Gas is an evenly balanced hybrid strain (50% indica/50% sativa) created through a potent cross of (OG Chem X Grand Daddy Purple) X The Truth.</p>
                 <a href="coming-soon.html" class="coa-btn">View COA</a>
             </div>
-
             <div class="pricing">
                 <span><span class="weight">3.5g</span> <span class="price">$25</span></span>
                 <span><span class="weight">7g</span> <span class="price">$40</span></span>
                 <span><span class="weight">14g</span> <span class="price">$70</span></span>
                 <span><span class="weight">28g</span> <span class="price">$120</span></span>
             </div>
-            <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><br><strong>WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION</strong></p>
-            <p>+$5-10 For Delivery, Pickup HIGHLY Preferred</p>
-            <p><strong>We only accept cash.</strong></p>
+            <p><strong>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540</a></p>
+			<p>WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION.</p>
+            <p>Available for Pickup only.</p>
+            <p>We only accept cash.</strong></p>
         </div>
-    </div>
-    
-</section>
+    </article>
+</main>
 
 <div class="order-bar">
-    <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540 </a><strong>WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION</strong></p>
+    <p>To Order Text: <a href="sms:+17373219540" class="sms-link">(737) 321-9540</a><strong> WITH YOUR ID OR DRIVERS LICENSE + FACE VERIFICATION</strong></p>
     <p>Farm Bill Compliant | 21+ Only</p>
 </div>
 
-<script>
-document.querySelectorAll('.toggle-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const details = button.nextElementSibling;
-        details.classList.toggle('show');
-        button.innerText = details.classList.contains('show') ? "Hide Strain Details" : "View Strain Details";
-    });
-});
-</script>
-
-<!-- Zoomable Image Modal -->
-<div id="imgModal" class="modal">
-    <span class="close">&times;</span>
+<div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <span class="close" aria-label="Close Modal">&times;</span>
     <div class="modal-content-container">
-        <img class="modal-content" id="modalImg">
+        <img class="modal-content" id="modalImg" alt="">
     </div>
 </div>
-
-<script>
-(function() {
-    const modal = document.getElementById("imgModal");
-    const modalImg = document.getElementById("modalImg");
-    const closeBtn = document.querySelector(".close");
-    let scale = 1;
-    let panX = 0, panY = 0;
-    let isDragging = false;
-    let startX, startY;
-
-    document.querySelectorAll(".strain-img").forEach(img => {
-        img.addEventListener("click", function() {
-            modal.style.display = "flex";
-            modalImg.src = this.src;
-            resetZoom();
-        });
-    });
-
-    closeBtn.onclick = () => modal.style.display = "none";
-    modal.onclick = (e) => {
-        if (e.target === modal) modal.style.display = "none";
-    };
-
-    modalImg.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        isDragging = true;
-        startX = e.clientX - panX;
-        startY = e.clientY - panY;
-        modalImg.style.cursor = "grabbing";
-    });
-
-    window.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        panX = e.clientX - startX;
-        panY = e.clientY - startY;
-        applyTransform();
-    });
-
-    window.addEventListener("mouseup", () => {
-        isDragging = false;
-        modalImg.style.cursor = "grab";
-    });
-
-    modalImg.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        const rect = modalImg.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const delta = -Math.sign(e.deltaY) * 0.1;
-        const newScale = Math.min(3, Math.max(0.5, scale + delta));
-        zoomAt(newScale, mouseX, mouseY);
-    });
-
-    let touchDistance = 0;
-    modalImg.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-        if (e.touches.length === 2) {
-            touchDistance = getTouchDistance(e.touches);
-        } else if (e.touches.length === 1) {
-            isDragging = true;
-            startX = e.touches[0].clientX - panX;
-            startY = e.touches[0].clientY - panY;
-        }
-    }, { passive: false });
-
-    modalImg.addEventListener("touchmove", (e) => {
-        e.preventDefault();
-        if (e.touches.length === 2) {
-            const newDist = getTouchDistance(e.touches);
-            const delta = (newDist - touchDistance) * 0.01;
-            const newScale = Math.min(3, Math.max(0.5, scale + delta));
-            const rect = modalImg.getBoundingClientRect();
-            const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
-            const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
-            zoomAt(newScale, midX, midY);
-            touchDistance = newDist;
-        } else if (e.touches.length === 1 && isDragging) {
-            panX = e.touches[0].clientX - startX;
-            panY = e.touches[0].clientY - startY;
-            applyTransform();
-        }
-    }, { passive: false });
-
-    modalImg.addEventListener("touchend", (e) => {
-        if (e.touches.length < 2) touchDistance = 0;
-        if (e.touches.length === 0) isDragging = false;
-    });
-
-    modalImg.addEventListener("dblclick", resetZoom);
-
-    function getTouchDistance(touches) {
-        const dx = touches[0].clientX - touches[1].clientX;
-        const dy = touches[0].clientY - touches[1].clientY;
-        return Math.sqrt(dx*dx + dy*dy);
-    }
-
-    function zoomAt(newScale, x, y) {
-        const rect = modalImg.getBoundingClientRect();
-        const originX = x / rect.width;
-        const originY = y / rect.height;
-        panX = panX - (newScale - scale) * originX * rect.width;
-        panY = panY - (newScale - scale) * originY * rect.height;
-        scale = newScale;
-        applyTransform();
-    }
-
-    function resetZoom() {
-        scale = 1;
-        panX = 0;
-        panY = 0;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        modalImg.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
-    }
-})();
-</script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
