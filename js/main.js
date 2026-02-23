@@ -102,18 +102,18 @@ document.addEventListener("DOMContentLoaded", function() {
         return Math.sqrt(dx*dx + dy*dy);
     }
 
-	function zoomAt(newScale, mouseX, mouseY) {
-		const rect = modalImg.getBoundingClientRect();
-		const mouseImgX = mouseX;
-		const mouseImgY = mouseY;		
-		const newPanX = mouseImgX - (mouseImgX - panX) * (newScale / scale);
-		const newPanY = mouseImgY - (mouseImgY - panY) * (newScale / scale);
-	
-		panX = newPanX;
-		panY = newPanY;
-		scale = Math.min(3, Math.max(0.5, newScale));
-		applyTransform();
-	}
+    function zoomAt(newScale, mouseX, mouseY) {
+        const rect = modalImg.getBoundingClientRect();
+        const mouseImgX = mouseX;
+        const mouseImgY = mouseY;		
+        const newPanX = mouseImgX - (mouseImgX - panX) * (newScale / scale);
+        const newPanY = mouseImgY - (mouseImgY - panY) * (newScale / scale);
+    
+        panX = newPanX;
+        panY = newPanY;
+        scale = Math.min(3, Math.max(0.5, newScale));
+        applyTransform();
+    }
 
     function resetZoom(){
         scale=1; panX=0; panY=0;
@@ -133,4 +133,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 : "View Strain Details";
         });
     });
+
+    const ageModal = document.getElementById('ageModal');
+    const ageYes = document.getElementById('ageYes');
+    const ageNo = document.getElementById('ageNo');
+
+    if (ageModal && ageYes && ageNo) {
+        if (!sessionStorage.getItem('ageVerified')) {
+            ageModal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        } else {
+            ageModal.style.display = 'none';
+        }
+
+        ageYes.addEventListener('click', function() {
+            sessionStorage.setItem('ageVerified', 'true');
+            ageModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        });
+
+        ageNo.addEventListener('click', function() {
+            window.location.href = 'https://google.com';
+        });
+
+        ageModal.addEventListener('click', function(e) {
+            if (e.target === ageModal) {
+                alert('You must verify your age to enter this site.');
+            }
+        });
+    }
 });
